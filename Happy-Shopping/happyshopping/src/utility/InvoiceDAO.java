@@ -15,6 +15,7 @@ public class InvoiceDAO {
 		Session session=HibernateUtility.getSession();
 		Query query=session.createQuery("select itemid, quantity from invoice where billno=:b");
 		query.setParameter("b", billno);
+		@SuppressWarnings("unchecked")
 		List<Object[]> list=query.list();
 		for(Object[] i:list) {
 			Invoice invoice = new Invoice();

@@ -3,7 +3,6 @@ package utility;
 //import java.sql.Connection;
 //import java.sql.ResultSet;
 //import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -15,10 +14,11 @@ public class ItemDAO {
 		System.out.println("Get all items called");
 		Session session=HibernateUtility.getSession();
 		Criteria criteria=session.createCriteria(Items.class);
+		@SuppressWarnings("unchecked")
 		List<Items> items = criteria.list();
-		items.forEach(item->{
-			System.out.println(item.getItemname());
-		});
+//		items.forEach(item->{
+//			System.out.println(item.getItemname());
+//		});
 //		Connection con = ConnectionUtility.createConnection();
 //		System.out.println(con);
 //		try {

@@ -1,7 +1,6 @@
 package utility;
 
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.itextpdf.text.BadElementException;
@@ -16,10 +15,10 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFGenerator {
-    public final static void generateBill (Bill bill, String path) {
+    public final static void generateBill (Bill bill, OutputStream out) {
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(path));
+            PdfWriter.getInstance(document, out);
             document.open();
             addContent(document, bill);
             document.close();

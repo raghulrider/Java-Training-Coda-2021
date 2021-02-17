@@ -89,10 +89,21 @@ public class InvoiceMasterDAO {
 		}
 		return newBillNo;
 	}
-
+	
+	public final static List<InvoiceMaster> getAllInvoice(){
+		Session session=HibernateUtility.getSession();
+		Criteria criteria=session.createCriteria(InvoiceMaster.class);
+		@SuppressWarnings("unchecked")
+		List<InvoiceMaster> minvoices = criteria.list();
+		minvoices.forEach(invoice->{
+			System.out.println(invoice.getBillno());
+		});
+		return minvoices;
+	}
 	public final static List<String> getAllBillNos() {
 		Session session = HibernateUtility.getSession();
 		Query query = session.createQuery("select billno from invoicemaster");
+		@SuppressWarnings("unchecked")
 		List<String> bills = query.list();
 
 //		ArrayList<String> bills=new ArrayList<>();

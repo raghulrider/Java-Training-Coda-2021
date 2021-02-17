@@ -38,7 +38,7 @@ public class RequestProcessor implements Cloneable {
 			String result = action.execute(request, response);
 			String pageToLoad = configFile.getProperty(result);
 			System.out.println("Page to load : "+pageToLoad);
-			if(!formID.equals("downloadbill")) {
+			if(!formID.equals("downloadbill") && !formID.equals("downloadindividualbill")) {
 				RequestDispatcher rd = request.getRequestDispatcher(pageToLoad);
 				rd.forward(request, response);
 			}

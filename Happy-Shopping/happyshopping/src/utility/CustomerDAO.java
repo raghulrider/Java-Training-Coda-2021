@@ -1,9 +1,6 @@
 package utility;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -145,6 +142,7 @@ public class CustomerDAO {
 	public final static List<String> getAllCustomerIds() {
 		Session session=HibernateUtility.getSession();
 		Query query=session.createQuery("select customerid from customer");
+		@SuppressWarnings("unchecked")
 		List<String> customerIds = query.list();
 //		ArrayList<String> customerIds = new ArrayList<>();
 //		Connection con = ConnectionUtility.createConnection();

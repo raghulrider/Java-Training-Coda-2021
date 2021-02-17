@@ -1,8 +1,7 @@
 package utility;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
 
 import jxl.Workbook;
@@ -12,7 +11,7 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
 public class ExcelGenerator {
-    public static final boolean generateBill(Bill bill, String path) {
+    public static final boolean generateBill(Bill bill, OutputStream out) {
     	WritableWorkbook myFirstWbook = null;
     	InvoiceMaster invoiceMaster = bill.getInvoiceMaster();
     	Customer customer = bill.getCustomer();
@@ -26,7 +25,7 @@ public class ExcelGenerator {
     	String customerAddress = customer.getCustomerAddress();
     	
         try {
-            myFirstWbook = Workbook.createWorkbook(new File(path));
+            myFirstWbook = Workbook.createWorkbook(out);
             WritableSheet excelSheet = myFirstWbook.createSheet("Sheet 1", 0);
             
             Label label = new Label(0, 0, "Bill No");
