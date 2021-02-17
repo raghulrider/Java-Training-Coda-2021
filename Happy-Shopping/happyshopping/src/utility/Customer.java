@@ -1,37 +1,45 @@
 package utility;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="customer")
+@Table(name="customer")
 public class Customer {
-	private String customerId, customerName, customerPhoneNumber, customerAddress;
+	@Id()
+	private String customerid;
+	private String customername, customerphonenumber, customeraddress;
 
 	public String getCustomerId() {
-		return customerId;
+		return customerid;
 	}
 
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setCustomerId(String customerid) {
+		this.customerid = customerid;
 	}
 
 	public String getCustomerName() {
-		return customerName;
+		return customername;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomerName(String customername) {
+		this.customername = customername;
 	}
 
 	public String getCustomerPhoneNumber() {
-		return customerPhoneNumber;
+		return customerphonenumber;
 	}
 
-	public void setCustomerPhoneNumber(String customerPhoneNumber) {
-		this.customerPhoneNumber = customerPhoneNumber;
+	public void setCustomerPhoneNumber(String customerphoneNumber) {
+		this.customerphonenumber = customerphoneNumber;
 	}
 
 	public String getCustomerAddress() {
-		return customerAddress;
+		return customeraddress;
 	}
 
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
+	public void setCustomerAddress(String customeraddress) {
+		this.customeraddress = customeraddress;
 	}
 }

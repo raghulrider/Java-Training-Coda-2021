@@ -1,5 +1,5 @@
 <%@page import="utility.ItemDAO"%>
-<%@page import="utility.Item"%>
+<%@page import="utility.Items"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="utility.EmployeeDAO"%>
 <%@page import="utility.Employee"%>

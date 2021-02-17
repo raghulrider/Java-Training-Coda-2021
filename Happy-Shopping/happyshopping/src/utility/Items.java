@@ -1,7 +1,15 @@
 package utility;
 
-public class Item {
-	private String itemid, itemname, unit, imageurl, shopid;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="items")
+@Table(name="items")
+public class Items {
+	@Id()
+	private String itemid;
+	private String itemname, unit, imageurl, shopid;
 	private int price;
 	public String getItemid() {
 		return itemid;

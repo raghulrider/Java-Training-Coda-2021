@@ -2,6 +2,7 @@ package utility;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Chapter;
@@ -110,12 +111,12 @@ public class PDFGenerator {
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
         
-		ArrayList<Invoice> invoices = bill.getInvoices();
+		List<Invoice> invoices = bill.getInvoices();
 		table.setHeaderRows(1);
 		int totalAmount = 0;
 		int count=0;
 		for(Invoice invoice : invoices) {
-			Item item = ItemDAO.getItem(invoice.getItemid());
+			Items item = ItemDAO.getItem(invoice.getItemid());
 			count++;
 			int total = item.getPrice()*Integer.parseInt(invoice.getQuantity());
 			totalAmount  += total;

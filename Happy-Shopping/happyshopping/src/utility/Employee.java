@@ -1,7 +1,15 @@
 package utility;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name = "employee")
+@Table(name = "employee")
 public class Employee {
-	private String employeeid, name, password;
+	@Id()
+	private String employeeid;
+	private String employeename, password;
 	private int status;
 
 	public int getStatus() {
@@ -21,11 +29,11 @@ public class Employee {
 	}
 
 	public String getName() {
-		return name;
+		return employeename;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.employeename = name;
 	}
 
 	public String getPassword() {

@@ -3,6 +3,7 @@ package utility;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import jxl.Workbook;
 import jxl.write.Label;
@@ -15,7 +16,7 @@ public class ExcelGenerator {
     	WritableWorkbook myFirstWbook = null;
     	InvoiceMaster invoiceMaster = bill.getInvoiceMaster();
     	Customer customer = bill.getCustomer();
-    	ArrayList<Invoice> invoices = bill.getInvoices();
+    	List<Invoice> invoices = bill.getInvoices();
     	
     	String billNo = invoiceMaster.getBillno();
     	String billDate = invoiceMaster.getBilldate();
@@ -91,7 +92,7 @@ public class ExcelGenerator {
             	count++;
             	String itemId = invoice.getItemid();
             	String qty = invoice.getQuantity();
-            	Item item = ItemDAO.getItem(itemId);
+            	Items item = ItemDAO.getItem(itemId);
             	int price = item.getPrice();
             	int total = price*(Integer.parseInt(qty));
             	totalAmount += total;

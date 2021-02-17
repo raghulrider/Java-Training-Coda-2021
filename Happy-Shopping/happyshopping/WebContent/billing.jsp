@@ -2,7 +2,7 @@
 <%@page import="java.util.Properties"%>
 <%@page import="utility.Customer"%>
 <%@page import="utility.CustomerDAO"%>
-<%@page import="utility.Item"%>
+<%@page import="utility.Items"%>
 <%@page import="utility.ItemDAO"%>
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

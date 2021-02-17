@@ -1,7 +1,7 @@
 <%@page import="actionerrors.ActionError"%>
 <%@page import="java.util.Set"%>
 <%@page import="actionerrors.ActionErrors"%>
-<%@page import="utility.Item"%>
+<%@page import="utility.Items"%>
 <%@page import="utility.ItemDAO"%>
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

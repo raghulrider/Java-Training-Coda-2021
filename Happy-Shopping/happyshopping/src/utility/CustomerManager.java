@@ -1,6 +1,7 @@
 package utility;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class CustomerManager {
@@ -22,14 +23,19 @@ public class CustomerManager {
 
 	public final boolean checkCustomerExists() {
 		System.out.println("Trying to fetch data using phone number"+this.customer.getCustomerPhoneNumber());
-		Customer c = CustomerDAO.getCustomerByCustomerPhoneNumber(this.customer.getCustomerPhoneNumber());
-		if(c!=null) {
-			return true;
+		if(this.customer.getCustomerPhoneNumber()!=null && this.customer.getCustomerPhoneNumber().length()!=0) {
+			Customer c = CustomerDAO.getCustomerByCustomerPhoneNumber(this.customer.getCustomerPhoneNumber());
+			if(c!=null) {
+				return true;
+			}
 		}
+		
+		if(this.customer.getCustomerId()!=null && this.customer.getCustomerId().length()!=0) {
 		System.out.println("Trying to fetch data using customer id"+this.customer.getCustomerId());
-		c = CustomerDAO.getCustomerByCustomerId(this.customer.getCustomerId());
+		Customer c = CustomerDAO.getCustomerByCustomerId(this.customer.getCustomerId());
 		if(c!=null) {
 			return true;
+			}
 		}
 		return false;
 	}
@@ -59,7 +65,7 @@ public class CustomerManager {
 		Random rand = new Random();
 	    int resRandom = rand.nextInt((9999 - 100) + 1) + 10;
 	    String newCustomerID = "C"+String.valueOf(resRandom);
-	    ArrayList<String> customerIds = CustomerDAO.getAllCustomerIds();
+	    List<String> customerIds = CustomerDAO.getAllCustomerIds();
 	    for(String customerId:customerIds) {
 	    	if(customerId.equals(newCustomerID)) {
 	    		newCustomerID=generateCustomerID();
@@ -73,10 +79,7 @@ public class CustomerManager {
 			return getCustomer();
 		}
 		this.customer.setCustomerId(generateCustomerID());
-		boolean result = CustomerDAO.insertCustomer(this.customer.getCustomerId(),
-				this.customer.getCustomerName(), 
-				this.customer.getCustomerPhoneNumber(), 
-				this.customer.getCustomerAddress());
+		boolean result = CustomerDAO.insertCustomer(this.customer);
 		System.out.println("Insertion result : "+result);
 		return getCustomer();
 	}

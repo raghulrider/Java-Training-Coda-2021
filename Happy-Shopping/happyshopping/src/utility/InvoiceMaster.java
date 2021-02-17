@@ -1,7 +1,15 @@
 package utility;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="invoicemaster")
+@Table(name="invoicemaster")
 public class InvoiceMaster {
-	private String billno, billdate, customerid;
+	@Id()
+	private String billno;
+	private String billdate, customerid;
 	private int discount, gst;
 	public String getBillno() {
 		return billno;

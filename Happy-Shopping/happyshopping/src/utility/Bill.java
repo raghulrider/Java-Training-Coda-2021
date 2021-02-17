@@ -1,10 +1,11 @@
 package utility;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class Bill {
 	private InvoiceMaster invoiceMaster;
-	private ArrayList<Invoice> invoices;
+	private List<Invoice> invoices;
 	private Customer customer;
 	public InvoiceMaster getInvoiceMaster() {
 		return invoiceMaster;
@@ -18,10 +19,10 @@ public class Bill {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public ArrayList<Invoice> getInvoices() {
+	public List<Invoice> getInvoices() {
 		return invoices;
 	}
-	public void setInvoices(ArrayList<Invoice> invoices) {
+	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
 	}
 }

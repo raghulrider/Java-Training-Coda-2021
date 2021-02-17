@@ -70,10 +70,7 @@ public class EmployeeManager implements UserManager{
 			System.out.println("Employee already exists");
 			return false;
 		}
-		boolean result = EmployeeDAO.insertEmployee(this.employee.getEmployeeid(),
-				this.employee.getName(), 
-				this.employee.getPassword(), 
-				this.employee.getStatus());
+		boolean result = EmployeeDAO.insertEmployee(this.employee);
 		System.out.println("Insertion result : "+result);
 		return result;
 	}

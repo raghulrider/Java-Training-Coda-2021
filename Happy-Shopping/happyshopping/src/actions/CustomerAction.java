@@ -33,12 +33,10 @@ public class CustomerAction extends Action{
 			return "customer.register";
 		}
 		Customer customer = new Customer();
-		customer.setCustomerPhoneNumber(customerPhoneNumber);
-		CustomerManager customerManager = CustomerManager.getInstance(customer);
-		if(!customerManager.isNewInstance()) {
-			customerManager.setCustomer(customer);
-		}
+		CustomerManager customerManager = CustomerManager.getInstance(null);
 		if(customerPhoneNumber!=null && customerPhoneNumber.length()!=0) {
+			customer.setCustomerPhoneNumber(customerPhoneNumber);
+			customerManager.setCustomer(customer);
 			if(customerManager.checkCustomerExists()) {
 				customer = customerManager.findCustomerbyCustomerPhoneNumber(customerPhoneNumber);
 				session.setAttribute("customerId", customer.getCustomerId());
@@ -51,9 +49,9 @@ public class CustomerAction extends Action{
 				return "customer.failure";
 			}
 		}
-		customer.setCustomerId(customerId);
-		customerManager.setCustomer(customer);
 		if(customerId!=null && customerId.length()!=0) {
+			customer.setCustomerId(customerId);
+			customerManager.setCustomer(customer);
 			if(customerManager.checkCustomerExists()) {
 				customer = customerManager.findCustomerByCustomerId(customerId);
 				session.setAttribute("customerId", customer.getCustomerId());
