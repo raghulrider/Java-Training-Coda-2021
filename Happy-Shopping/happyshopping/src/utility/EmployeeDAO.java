@@ -82,12 +82,12 @@ public class EmployeeDAO {
 //	}
 	
 	public static final boolean setPassword(String employeeId, String password) {
-		Session session = HibernateUtility.getSession();
 		Employee employee = getEmployeeByEmployeeId(employeeId);
 		if(employee!=null) {
 			employee.setPassword(password);
 			try{
-				session.save(employee);
+				Session session = HibernateUtility.getSession();
+				session.saveOrUpdate(employee);
 				HibernateUtility.closeSession(null);
 				return true;
 			}catch(Exception e) {
@@ -114,15 +114,21 @@ public class EmployeeDAO {
 	}
 	
 	public static final boolean setStatus(String employeeId, int status) {
-		Session session = HibernateUtility.getSession();
+		System.out.println("trying for hiber session to update status to : "+status);
 		Employee employee = getEmployeeByEmployeeId(employeeId);
+		
+		//session = HibernateUtility.getSession();
+		
 		if(employee!=null) {
+			System.out.println("Requested to set status to : "+status+" for id : "+employeeId);
 			employee.setStatus(status);
 			try{
-				session.save(employee);
+				Session session = HibernateUtility.getSession();
+				session.saveOrUpdate(employee);
 				HibernateUtility.closeSession(null);
 				return true;
 			}catch(Exception e) {
+				e.printStackTrace();
 				HibernateUtility.closeSession(e);
 				return false;
 			}
@@ -147,12 +153,12 @@ public class EmployeeDAO {
 	}
 	
 	public static final boolean setEmployeeName(String employeeName, String employeeId) {
-		Session session = HibernateUtility.getSession();
 		Employee employee = getEmployeeByEmployeeId(employeeId);
 		if(employee!=null) {
 			employee.setName(employeeName);
 			try{
-				session.save(employee);
+				Session session = HibernateUtility.getSession();
+				session.saveOrUpdate(employee);
 				HibernateUtility.closeSession(null);
 				return true;
 			}catch(Exception e) {
@@ -180,9 +186,9 @@ public class EmployeeDAO {
 	}
 	
 	public static final boolean insertEmployee(Employee employee) {
-		Session session = HibernateUtility.getSession();
 		if(employee!=null) {
 			try{
+				Session session = HibernateUtility.getSession();
 				session.save(employee);
 				HibernateUtility.closeSession(null);
 				return true;
@@ -216,6 +222,7 @@ public class EmployeeDAO {
 		Criteria criteria=session.createCriteria(Employee.class);
 		criteria.add(Property.forName("employeeid").eq(employeeId));
 		Employee employee=(Employee)criteria.uniqueResult();
+		HibernateUtility.closeSession(null);
 		return employee;
 //		
 //		Employee employee=null;
@@ -253,6 +260,7 @@ public class EmployeeDAO {
 		Criteria criteria=session.createCriteria(Employee.class);
 		criteria.add(Property.forName("employeename").eq(employeeName));
 		Employee employee=(Employee)criteria.uniqueResult();
+		HibernateUtility.closeSession(null);
 		return employee;
 
 //		Employee employee=null;

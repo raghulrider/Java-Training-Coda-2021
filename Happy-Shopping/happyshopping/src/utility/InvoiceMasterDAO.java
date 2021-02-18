@@ -42,13 +42,15 @@ public class InvoiceMasterDAO {
 //			ConnectionUtility.closeConnection(e);
 //			e.printStackTrace();
 //		}
+		HibernateUtility.closeSession(null);
 		return invoiceMaster;
 	}
 
 	public final static boolean insertInvoiceMaster(InvoiceMaster invoiceMaster) {
-		Session session = HibernateUtility.getSession();
+		
 		if (invoiceMaster != null) {
 			try {
+				Session session = HibernateUtility.getSession();
 				session.save(invoiceMaster);
 				HibernateUtility.closeSession(null);
 				return true;
@@ -98,6 +100,7 @@ public class InvoiceMasterDAO {
 		minvoices.forEach(invoice->{
 			System.out.println(invoice.getBillno());
 		});
+		HibernateUtility.closeSession(null);
 		return minvoices;
 	}
 	public final static List<String> getAllBillNos() {
@@ -120,6 +123,7 @@ public class InvoiceMasterDAO {
 //			ConnectionUtility.closeConnection(e);
 //			e.printStackTrace();
 //		}
+		HibernateUtility.closeSession(null);
 		return bills;
 	}
 }

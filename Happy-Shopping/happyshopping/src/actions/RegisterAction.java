@@ -23,6 +23,7 @@ public class RegisterAction extends Action{
 		HttpSession session = request.getSession();
 		ActionErrors errors = new ActionErrors();
 		Set<ActionError> errorSet = new HashSet<>();
+		
 		if(employeeId.length()==0 || employeeId==null) {
 			ActionError emptyIdError =  new RegisterFailureAction("Please enter Employee ID");
 			errorSet.add(emptyIdError);
@@ -30,6 +31,7 @@ public class RegisterAction extends Action{
 			session.setAttribute("registrationErrors", errors);
 			return "register.failure";
 		}
+		
 		if(employeeName.length()==0 || employeeName==null) {
 			ActionError emptyIdError =  new RegisterFailureAction("Please enter Employee Name");
 			errorSet.add(emptyIdError);
@@ -59,7 +61,6 @@ public class RegisterAction extends Action{
 		
 		boolean result = employeeManager.register();
 		if(result) {
-			session.setAttribute("employeeId", employeeId);
 			return "register.success";
 		}else {
 			ActionError registrationFailed=  new RegisterFailureAction("Registration failed. "

@@ -10,6 +10,7 @@ public class EmployeeManager implements UserManager{
 	}
 
 	public void setEmployee(Employee employee) {
+		System.out.println("Employee updated : "+employee.getStatus());
 		this.employee = employee;
 	}
 
@@ -88,6 +89,7 @@ public class EmployeeManager implements UserManager{
 	
 	public final boolean updateEmployeeLoginStatus() {
 		boolean result = EmployeeDAO.setStatus(this.employee.getEmployeeid(), this.employee.getStatus());
+		System.out.println("Set login status : "+result);
 		return result;
 	}
 }

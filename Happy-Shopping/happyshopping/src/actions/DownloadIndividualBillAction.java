@@ -15,12 +15,19 @@ import utility.PDFGenerator;
 public class DownloadIndividualBillAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String billno = (String) request.getParameter("billno");
 		System.out.println("billno : "+billno);
+		
 		Bill bill = DatabaseMaster.getBill(billno);
-
+		if(bill==null) {
+			System.out.println("Bill is null");
+			return "downloadindividualbill.failure";
+		}
+		
 		String genPdf = request.getParameter("genPdf");
 		String genExcel = request.getParameter("genExcel");
+		
 		OutputStream out;
 		try {
 			out = response.getOutputStream();
@@ -28,6 +35,7 @@ public class DownloadIndividualBillAction extends Action{
 			e1.printStackTrace();
 			return "downloadindividualbill.failure";
 		}
+		
 		if (genPdf != null) {
 			response.setContentType("application/pdf");
 			response.setHeader("Content-disposition", "attachment; filename=" + billno + "_invoice.pdf");
@@ -40,6 +48,7 @@ public class DownloadIndividualBillAction extends Action{
 			ExcelGenerator.generateBill(bill, out);
 			return "downloadindividualbill.success";
 		}
-		return "downloadindividualbill.success";
+		
+		return "downloadindividualbill.failure";
 	}
 }

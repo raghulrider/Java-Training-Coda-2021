@@ -16,10 +16,12 @@ import utility.EmployeeManager;
 public class LoginAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String employeeId = request.getParameter("employeeId");
 		String password = request.getParameter("password");
-		Employee employee = new Employee();
+		
 		HttpSession session = request.getSession();
+		
 		ActionErrors errors = new ActionErrors();
 		Set<ActionError> errorSet = new HashSet<>();
 		
@@ -39,12 +41,15 @@ public class LoginAction extends Action{
 			return "login.failure";
 		}
 		
+		Employee employee = new Employee();
 		employee.setEmployeeid(employeeId);
 		employee.setPassword(password);
+		
 		EmployeeManager employeeManager = EmployeeManager.getInstance(employee);
 		if(!employeeManager.isNewInstance()) {
 			employeeManager.setEmployee(employee);
 		}
+		
 		if(!employeeManager.checkEmployeeExists()) {
 			ActionError employeeNotExists =  new InvalidLoginActionError("Employee with ID "+employeeId+" does not exists. Please register or contact admin.");
 			errorSet.add(employeeNotExists);
@@ -60,19 +65,20 @@ public class LoginAction extends Action{
 			session.setAttribute("loginErrors", errors);
 			return "login.failure";
 		}
+		
 		if(employeeManager.checkIfEmployeeAlreadyLoggedIn()) {
-			session = request.getSession();
 			session.setAttribute("employeeId", employeeId);
 			System.out.println("Test ID : "+session.getAttribute("employeeId"));
 			return "login.alreadyLoggedIn";
 		}else {
+			System.out.println("Employee status before login : "+employee.getStatus());
 			employee.setStatus(1);
 			employeeManager.setEmployee(employee);
 			boolean result=employeeManager.updateEmployeeLoginStatus();
-			System.out.println("Set login status : "+result);
-			session = request.getSession();
+			System.out.println("Login status update : "+result);
+			System.out.println("Employee status after login : "+employee.getStatus());
 			session.setAttribute("employeeId", employeeId);
-			System.out.println("Test ID : "+session.getAttribute("employeeId"));
+			System.out.println("Logged in employee ID : "+session.getAttribute("employeeId"));
 			return "login.success";
 		}
 	}

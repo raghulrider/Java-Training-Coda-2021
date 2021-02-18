@@ -58,13 +58,6 @@ margin-right: 8px;
 }
 </style>
 </head>
-<form method="post" action="downloadbill.do">
-	<input type="hidden" name="formid" value="downloadbill"> <input
-		type="hidden" name="genPdf" value="yes">
-	<button class="btn btn-primary" type="submit">Download Invoice
-		as PDF</button>
-</form>
-
 <body>
 	<%@ include file="header.jsp"%>
 	<c:set var="employeeId" scope="session"

@@ -55,9 +55,12 @@
 									</div>
 								</div>
 							</c:forEach>
-						<c:remove var="registrationErrors" scope="session"/>
-					<button type="button" onclick="window.location.href='/happyshopping/login.jsp'" class="btn btn-link">Login</button>
+						<c:remove var="registrationErrors" scope="session"/>		
 				</form>
+				<form method="post" action="gotologin.do">
+						<input type="hidden" name="formid" value="gotologin">
+						<button type="submit" class="btn btn-link">Login</button>
+					</form>
 			</div>
 			</div>
 			</div>

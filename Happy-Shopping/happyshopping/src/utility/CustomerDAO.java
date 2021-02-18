@@ -16,6 +16,7 @@ public class CustomerDAO {
 		Criteria criteria=session.createCriteria(Customer.class);
 		criteria.add(Property.forName("customerid").eq(customerId));
 		Customer customer=(Customer)criteria.uniqueResult();
+		HibernateUtility.closeSession(null);
 		return customer;
 		
 //		Customer customer=null;
@@ -49,6 +50,7 @@ public class CustomerDAO {
 		Criteria criteria=session.createCriteria(Customer.class);
 		criteria.add(Property.forName("customerphonenumber").eq(customerPhoneNumber));
 		Customer customer=(Customer)criteria.uniqueResult();
+		HibernateUtility.closeSession(null);
 		return customer;
 		
 //		Customer customer=null;
@@ -79,9 +81,9 @@ public class CustomerDAO {
 
 	public final static boolean insertCustomer(Customer customer) {
 		
-		Session session = HibernateUtility.getSession();
 		if(customer!=null) {
 			try{
+				Session session = HibernateUtility.getSession();
 				session.save(customer);
 				HibernateUtility.closeSession(null);
 				return true;
@@ -112,9 +114,9 @@ public class CustomerDAO {
 	
 	public final static boolean updateCustomer(Customer customer) {
 		
-		Session session = HibernateUtility.getSession();
 		if(customer!=null) {
 			try{
+				Session session = HibernateUtility.getSession();
 				session.saveOrUpdate(customer);
 				HibernateUtility.closeSession(null);
 				return true;
@@ -159,6 +161,7 @@ public class CustomerDAO {
 //			ConnectionUtility.closeConnection(e);
 //			e.printStackTrace();
 //		}
+		HibernateUtility.closeSession(null);
 		return customerIds;
 	}
 

@@ -1,5 +1,9 @@
 <div class="header">
-	<a href="#yettoimplement" class="logo">HappyShopping</a>
+	<form action="gotohome.do" method="post" id="home">
+			<input type="hidden" name="formid" value="gotohome">
+			<a onclick="document.getElementById('home').submit();" class="logo">Happy Shopping</a>
+		</form>
+	
 	<div class="header-right">
 		<form style="display: inline-block" action="allreport.do"
 			method="post">

@@ -16,6 +16,7 @@ import utility.CustomerManager;
 public class RegisterCustomerAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String customerName = request.getParameter("ncustomerName");
 		String customerPhoneNumber = request.getParameter("ncustomerPhoneNumber");
 		String customerAddress = request.getParameter("ncustomerAddress");
@@ -24,13 +25,16 @@ public class RegisterCustomerAction extends Action{
 		customer.setCustomerName(customerName);
 		customer.setCustomerPhoneNumber(customerPhoneNumber);
 		customer.setCustomerAddress(customerAddress);
+		
 		ActionErrors errors =new ActionErrors(); 
 		Set<ActionError> errorSet = new HashSet<>();
 		HttpSession session = request.getSession();
+		
 		CustomerManager customerManager = CustomerManager.getInstance(customer);
 		if(!customerManager.isNewInstance()) {
 			customerManager.setCustomer(customer);
 		}
+		
 		if(customerPhoneNumber.length()==0) {
 			ActionError error = new InvalidCustomerRegisterAction("Phone number is mandatory");
 			errorSet.add(error);

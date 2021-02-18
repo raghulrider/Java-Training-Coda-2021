@@ -19,10 +19,16 @@ public class DownloadBillAction extends Action {
 
 		String billno = (String) session.getAttribute("billno");
 		System.out.println("billno : "+billno);
+		
 		Bill bill = DatabaseMaster.getBill(billno);
-
+		if(bill==null) {
+			System.out.println("Bill is null");
+			return "downloadbill.failure";
+		}
+		
 		String genPdf = request.getParameter("genPdf");
 		String genExcel = request.getParameter("genExcel");
+		
 		OutputStream out;
 		try {
 			out = response.getOutputStream();
@@ -30,6 +36,7 @@ public class DownloadBillAction extends Action {
 			e1.printStackTrace();
 			return "downloadbill.failure";
 		}
+		
 		if (genPdf != null) {
 			response.setContentType("application/pdf");
 			response.setHeader("Content-disposition", "attachment; filename=" + billno + "_invoice.pdf");
@@ -42,7 +49,7 @@ public class DownloadBillAction extends Action {
 			ExcelGenerator.generateBill(bill, out);
 			return "downloadbill.success";
 		}
-		return "downloadbill.success";
+		return "downloadbill.failure";
 	}
 
 }

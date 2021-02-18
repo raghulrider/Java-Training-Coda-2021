@@ -4,9 +4,10 @@ import java.util.List;
 
 public class DatabaseMaster {
 	public final static Bill getBill(String billno) {
-		Bill bill = new Bill();
+		Bill bill =null;
 		InvoiceMaster invoiceMaster = InvoiceMasterDAO.fetchInvoiceMaster(billno);
 		if(invoiceMaster!=null) {
+			bill = new Bill();
 			List<Invoice> invoices = InvoiceDAO.getInvoice(billno);
 			Customer customer = CustomerDAO.getCustomerByCustomerId(invoiceMaster.getCustomerid());
 			bill.setCustomer(customer);

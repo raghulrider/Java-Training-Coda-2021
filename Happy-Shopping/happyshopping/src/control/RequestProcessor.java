@@ -22,17 +22,23 @@ public class RequestProcessor implements Cloneable {
 	}
 
 	synchronized public void process(HttpServletRequest request, HttpServletResponse response) {
+		
 		String formID = request.getParameter("formid");
-		HttpSession session = request.getSession();
 		System.out.println(formID);
+		
 		ServletContext ctx = request.getServletContext();
+		
 		Properties configFile = (Properties) ctx.getAttribute("configFile");
 		String actionClass = configFile.getProperty(formID);
+		System.out.println(actionClass);
+		
 		int gst = Integer.parseInt(configFile.getProperty("gst"));
 		int discount = Integer.parseInt(configFile.getProperty("discount"));
+		
+		HttpSession session = request.getSession();
 		session.setAttribute("gst", gst);
 		session.setAttribute("discount", discount);
-		System.out.println(actionClass);
+		
 		try {
 			Action action = (Action) Class.forName(actionClass).getDeclaredConstructor().newInstance();
 			String result = action.execute(request, response);
@@ -42,7 +48,6 @@ public class RequestProcessor implements Cloneable {
 				RequestDispatcher rd = request.getRequestDispatcher(pageToLoad);
 				rd.forward(request, response);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

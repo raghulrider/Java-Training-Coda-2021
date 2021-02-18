@@ -13,9 +13,11 @@ public class ShoppingAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		
 		Enumeration<String> en = request.getParameterNames();
 		System.out.println(en.nextElement());
 		Map<String, String> items = new HashMap<>();
+		
 		while(en.hasMoreElements()) {
 			String key = en.nextElement();
 			String value  = request.getParameter(key);

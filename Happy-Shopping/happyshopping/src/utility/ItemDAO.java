@@ -41,6 +41,7 @@ public class ItemDAO {
 //			ConnectionUtility.closeConnection(e);
 //			e.printStackTrace();
 //		}
+		HibernateUtility.closeSession(null);
 		return items;
 	}
 	
@@ -49,6 +50,7 @@ public class ItemDAO {
 		Criteria criteria=session.createCriteria(Items.class);
 		criteria.add(Property.forName("itemid").eq(itemId));
 		Items item=(Items)criteria.uniqueResult();
+		HibernateUtility.closeSession(null);
 		return item;
 		
 //		Connection con = ConnectionUtility.createConnection();

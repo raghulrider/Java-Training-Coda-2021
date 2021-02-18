@@ -46,13 +46,14 @@ public class InvoiceDAO {
 //			ConnectionUtility.closeConnection(e);
 //			e.printStackTrace();
 //		}
+		HibernateUtility.closeSession(null);
 		return invoices;
 	}
 	
 	public final static boolean setInvoice (Invoice invoice) {
-		Session session = HibernateUtility.getSession();
 		if(invoice!=null) {
 			try{
+				Session session = HibernateUtility.getSession();
 				session.save(invoice);
 				HibernateUtility.closeSession(null);
 				return true;

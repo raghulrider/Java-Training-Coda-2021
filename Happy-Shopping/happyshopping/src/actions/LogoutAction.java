@@ -16,14 +16,18 @@ public class LogoutAction extends Action{
 		HttpSession session = request.getSession();
 		String employeeId= (String) session.getAttribute("employeeId");
 		System.out.println("Logout requested : "+employeeId);
+		
 		EmployeeManager manager = EmployeeManager.getInstance(null);
 		Employee employee = manager.findEmployeeByEmployeeId(employeeId);
+		
 		System.out.println("Status before : "+employee.getStatus());
 		employee.setStatus(0);
 		manager.setEmployee(employee);
 		boolean result = manager.updateEmployeeLoginStatus();
-		System.out.println("Status after :"+manager.findEmployeeByEmployeeId(employeeId).getStatus());
+		System.out.println("Employee logout set status result : "+result);
+		System.out.println("Status after :"+employee.getStatus());
 		session.invalidate();
+		
 		if(result) {
 			return "logout.success";
 		}else {

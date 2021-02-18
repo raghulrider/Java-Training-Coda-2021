@@ -11,14 +11,17 @@ public class GotoShopAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		boolean result=false;
+		
 		Enumeration<String> en = session.getAttributeNames();
 		while(en.hasMoreElements()) {
 			String key = en.nextElement();
 			if(!key.equals("employeeId")) {
-				result=true;
 				session.removeAttribute(key);
+			}else {
+				result=true;
 			}
 		}
+		
 		if(result) {
 			return "gotoshop.success";
 		}else {
