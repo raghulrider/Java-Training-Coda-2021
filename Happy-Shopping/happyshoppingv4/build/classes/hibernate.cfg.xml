@@ -37,7 +37,7 @@
 		<mapping class="utility.Customer"/>
 		<mapping class="utility.Invoice"/>
 		<mapping class="utility.InvoiceMaster"/>
-	
+		<mapping class="utility.BillWithPrice"/>
 		
     </session-factory>
 

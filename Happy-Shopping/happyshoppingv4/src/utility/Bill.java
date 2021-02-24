@@ -7,6 +7,13 @@ public class Bill {
 	private InvoiceMaster invoiceMaster;
 	private List<Invoice> invoices;
 	private Customer customer;
+	private List<Items> items;
+	public List<Items> getItems() {
+		return items;
+	}
+	public void setItems(List<Items> items) {
+		this.items = items;
+	}
 	public InvoiceMaster getInvoiceMaster() {
 		return invoiceMaster;
 	}

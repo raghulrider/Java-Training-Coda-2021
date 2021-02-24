@@ -1,12 +1,14 @@
 package utility;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name="items")
 @Table(name="items")
-public class Items {
+public class Items implements Serializable{
 	@Id()
 	private String itemid;
 	private String itemname, unit, imageurl, shopid;

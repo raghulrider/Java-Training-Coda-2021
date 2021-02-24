@@ -6,6 +6,7 @@ public class DatabaseMaster {
 	public final static Bill getBill(String billno) {
 		Bill bill =null;
 		InvoiceMaster invoiceMaster = InvoiceMasterDAO.fetchInvoiceMaster(billno);
+		List<Items> items= BillWithPriceDAO.getBillWithPrice(billno);
 		if(invoiceMaster!=null) {
 			bill = new Bill();
 			List<Invoice> invoices = InvoiceDAO.getInvoice(billno);
@@ -13,6 +14,7 @@ public class DatabaseMaster {
 			bill.setCustomer(customer);
 			bill.setInvoiceMaster(invoiceMaster);
 			bill.setInvoices(invoices);
+			bill.setItems(items);
 		}
 		return bill;
 	}

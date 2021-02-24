@@ -1,11 +1,13 @@
 package utility;
 
+import java.util.ArrayList;
 //import java.sql.Connection;
 //import java.sql.ResultSet;
 //import java.sql.Statement;
 //import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -125,5 +127,43 @@ public class InvoiceMasterDAO {
 //		}
 		HibernateUtility.closeSession(null);
 		return bills;
+	}
+
+	public final static List<InvoiceMaster> getInvoiceByBillno(String billno) {
+		Session session=HibernateUtility.getSession();
+		Criteria criteria = session.createCriteria(InvoiceMaster.class);
+		criteria.add(Property.forName("billno").eq(billno));
+		InvoiceMaster minvoice = (InvoiceMaster) criteria.uniqueResult();
+		List<InvoiceMaster> minvoices = new ArrayList<>();
+		minvoices.add(minvoice);
+		System.out.println("Length : "+minvoices.size());
+		HibernateUtility.closeSession(null);
+		return minvoices;
+	}
+
+	public final static List<InvoiceMaster> getInvoiceByCustomerId(String customerId) {
+		Session session=HibernateUtility.getSession();
+		Criteria criteria=session.createCriteria(InvoiceMaster.class);
+		criteria.add(Property.forName("customerid").eq(customerId));
+		@SuppressWarnings("unchecked")
+		List<InvoiceMaster> minvoices = criteria.list();
+		minvoices.forEach(invoice->{
+			System.out.println(invoice.getBillno());
+		});
+		HibernateUtility.closeSession(null);
+		return minvoices;
+	}
+
+	public static List<InvoiceMaster> getInvoiceByDate(String billdate) {
+		Session session=HibernateUtility.getSession();
+		Criteria criteria=session.createCriteria(InvoiceMaster.class);
+		criteria.add(Property.forName("billdate").eq(billdate));
+		@SuppressWarnings("unchecked")
+		List<InvoiceMaster> minvoices = criteria.list();
+		minvoices.forEach(invoice->{
+			System.out.println(invoice.getBillno());
+		});
+		HibernateUtility.closeSession(null);
+		return minvoices;
 	}
 }

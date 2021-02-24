@@ -34,9 +34,9 @@ h6 {
 	display: inline-block;
 }
 
-form{
-display:inline-block;
-margin-right: 8px;
+form {
+	display: inline-block;
+	margin-right: 8px;
 }
 
 .float {
@@ -56,27 +56,57 @@ margin-right: 8px;
 	bottom: 15px;
 	transition: background 0.25s;
 }
+
+.main {
+	width: 70%;
+	margin: 50px auto;
+}
+
+.has-search .form-control {
+	padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+	position: absolute;
+	z-index: 2;
+	display: block;
+	width: 2.375rem;
+	height: 2.375rem;
+	line-height: 2.375rem;
+	text-align: center;
+	pointer-events: none;
+	color: #aaa;
+}
 </style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<c:set var="employeeId" scope="session"
-		value="${sessionScope.employeeId}" />
-	<c:set var="employee"
-		value="${EmployeeDAO.getEmployeeByEmployeeId(employeeId)}" />
-	<c:set var="employeeName" value="${employee.getName()}" />
-	<h6>
-		Employee ID :
-		<c:out value="${employeeId}" />
-	</h6>
-	<h6>
-		Employee Name :
-		<c:out value="${employeeName}" />
-	</h6>
 	<h2 style="text-align: center; display: block">All Invoices</h2>
+	<div class="main">
+		<form method="post" action="allreport.do" style="display: block">
+			<div class="input-group">
+				<input type="hidden" name="formid" value="allreport"> <input
+					type="text" class="form-control"
+					placeholder="Search using following syntax... bxxxx, Cxxxxx, DD-MM-YYY..."
+					name="searchKey">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+			<div class="form-check" style="display:block;text-align:center;">
+				<label class="form-check-label"> 
+				<input type="checkbox" name="sbd" value="true"> Sort by Date (Descending)
+				</label>
+			</div>
+
+		</form>
+	</div>
 	<div class="container">
 
-		<c:set var="minvoices" value="${InvoiceMasterDAO.getAllInvoice()}" />
+		<c:set var="minvoices" scope="session"
+			value="${sessionScope.minvoices}" />
 
 		<c:forEach items="${minvoices}" var="minvoice">
 			<div class="card bg-primary text-white">
@@ -88,16 +118,18 @@ margin-right: 8px;
 					<h5>Bill Date :</h5>
 					<h6>${minvoice.getBilldate()}</h6>
 					<form method="post" action="downloadbill.do">
-						<input type="hidden" name="formid" value="downloadindividualbill"> 
-						<input type="hidden" name="genPdf" value="yes">
-						<input type="hidden" name="billno" value="${minvoice.getBillno()}">
-						<button class="btn btn-danger" type="submit">Download Invoice as PDF</button>
+						<input type="hidden" name="formid" value="downloadindividualbill">
+						<input type="hidden" name="genPdf" value="yes"> <input
+							type="hidden" name="billno" value="${minvoice.getBillno()}">
+						<button class="btn btn-danger" type="submit">Download
+							Invoice as PDF</button>
 					</form>
 					<form method="post" action="downloadbill.do">
 						<input type="hidden" name="formid" value="downloadindividualbill">
-						<input type="hidden" name="genExcel" value="yes">
-						<input type="hidden" name="billno" value="${minvoice.getBillno()}">
-						<button class="btn btn-danger" type="submit">Download Invoice as Excel</button>
+						<input type="hidden" name="genExcel" value="yes"> <input
+							type="hidden" name="billno" value="${minvoice.getBillno()}">
+						<button class="btn btn-danger" type="submit">Download
+							Invoice as Excel</button>
 					</form>
 				</div>
 			</div>

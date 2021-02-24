@@ -91,7 +91,14 @@ public class ExcelGenerator {
             	count++;
             	String itemId = invoice.getItemid();
             	String qty = invoice.getQuantity();
-            	Items item = ItemDAO.getItem(itemId);
+ 
+    			List<Items> items = bill.getItems();
+    			Items item=null;
+    			for(Items itemm:items) {
+    				if(itemm.getItemid().equals(itemId)) {
+    					item=itemm;
+    				}
+    			}
             	int price = item.getPrice();
             	int total = price*(Integer.parseInt(qty));
             	totalAmount += total;

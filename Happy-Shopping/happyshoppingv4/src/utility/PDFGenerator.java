@@ -115,7 +115,14 @@ public class PDFGenerator {
 		int totalAmount = 0;
 		int count=0;
 		for(Invoice invoice : invoices) {
-			Items item = ItemDAO.getItem(invoice.getItemid());
+			String itemId = invoice.getItemid();
+			List<Items> items = bill.getItems();
+			Items item=null;
+			for(Items itemm:items) {
+				if(itemm.getItemid().equals(itemId)) {
+					item=itemm;
+				}
+			}
 			count++;
 			int total = item.getPrice()*Integer.parseInt(invoice.getQuantity());
 			totalAmount  += total;
